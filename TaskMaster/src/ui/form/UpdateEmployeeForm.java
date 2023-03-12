@@ -385,6 +385,11 @@ public class UpdateEmployeeForm extends javax.swing.JFrame {
         employee.setEmail(txtEmail.getText().trim());
         employee.setPhoneNumber(txtPhoneNumber.getText().trim());
         employee.setDateOfBirth(jdcDateOfBirth.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        
+        if (!Pattern.matches("^(?!0)\\d*\\.?\\d+", txtMonthlySalary.getText().trim())) {
+            JOptionPane.showMessageDialog(this, "Invalid input for monthly salary!");
+            return null;
+        }
         employee.setMonthlySalary(BigDecimal.valueOf(Double.parseDouble(txtMonthlySalary.getText())));
         employee.setTasks(jlAssignedTasks.getSelectedValuesList());
         return employee;

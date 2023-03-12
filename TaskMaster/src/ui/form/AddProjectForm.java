@@ -12,6 +12,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
@@ -129,7 +130,7 @@ public class AddProjectForm extends javax.swing.JFrame {
         txtDescription1.setRows(5);
         jScrollPane3.setViewportView(txtDescription1);
 
-        btnAdd.setText("Add");
+        btnAdd.setText(" Add Task");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -184,7 +185,7 @@ public class AddProjectForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel8.setText("Budget");
+        jLabel8.setText("Budget:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -253,14 +254,14 @@ public class AddProjectForm extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(tblTasks);
 
-        btnSave.setText("Save");
+        btnSave.setText("Save Project");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
             }
         });
 
-        btnRemove.setText("Remove");
+        btnRemove.setText("Remove Task");
         btnRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoveActionPerformed(evt);
@@ -359,6 +360,17 @@ public class AddProjectForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "You must enter all values!");
             return;
         }
+
+        if (jdcStartDate.getDate().after(jdcEndDate.getDate())) {
+            JOptionPane.showMessageDialog(this, "Invalid dates!");
+            return;
+        }
+
+        if (!Pattern.matches("^(?!0)\\d*\\.?\\d+", txtBudget.getText().trim())) {
+            JOptionPane.showMessageDialog(this, "Invalid input for budget!");
+            return;
+        }
+
         Project project = getInputData();
         try {
             ProjectController.getInstance().saveProject(project);
