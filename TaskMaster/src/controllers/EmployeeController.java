@@ -6,8 +6,8 @@ package controllers;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import model.Employee;
 import persistence.dao.EmployeeDao;
 import persistence.dao.impl.EmployeeDaoImpl;
@@ -48,7 +48,7 @@ public class EmployeeController {
         repositoryEmployee.updateEmployee(employee);
     }
 
-    public Map<String, Integer> getEmployeesWithMostCompletedTasksInPastMonth() throws SQLException {
+    public LinkedHashMap<String, Integer> getEmployeesWithMostCompletedTasksInPastMonth() throws SQLException {
         return repositoryEmployee.getEmployeesWithMostCompletedTasksInPastMonth();
     }
 

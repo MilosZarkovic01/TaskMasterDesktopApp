@@ -379,7 +379,7 @@ public class EmployeeForm extends javax.swing.JFrame {
             setJList();
             tblEmployees.setModel(new EmployeeTableModel(EmployeeController.getInstance().getAllEmployees()));
             tblEmployees.setShowHorizontalLines(true);
-
+            
             tblTop5Employees.setModel(new Top5EmployeesTableModel(EmployeeController.getInstance().getEmployeesWithMostCompletedTasksInPastMonth()));
             tblTop5Employees.setShowHorizontalLines(true);
         } catch (SQLException ex) {

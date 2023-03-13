@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -177,16 +178,17 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public Map<String, Integer> getEmployeesWithMostCompletedTasksInPastMonth() throws SQLException {
-        Map<String, Integer> employeesWithMostCompletedTasks = new HashMap<>();
+    public LinkedHashMap<String, Integer> getEmployeesWithMostCompletedTasksInPastMonth() throws SQLException {
+        LinkedHashMap<String, Integer> employeesWithMostCompletedTasks = new LinkedHashMap<>();
         try {
-            String sql = "SELECT e.full_name, COUNT(*) AS num_tasks_completed\n"
-                    + "FROM Employee e\n"
-                    + "INNER JOIN Task t ON e.id = t.assigned_employee_fk\n"
-                    + "WHERE t.due_date >= DATE_ADD(NOW(), INTERVAL -1 MONTH)\n"
-                    + "GROUP BY e.id, e.full_name\n"
-                    + "ORDER BY num_tasks_completed DESC\n"
-                    + "LIMIT 5;";
+            String sql = """
+                         SELECT e.full_name, COUNT(*) AS num_tasks_completed
+                         FROM Employee e
+                         INNER JOIN Task t ON e.id = t.assigned_employee_fk
+                         WHERE t.due_date >= DATE_ADD(NOW(), INTERVAL -1 MONTH)
+                         GROUP BY e.id, e.full_name
+                         ORDER BY num_tasks_completed DESC
+                         LIMIT 5;""";
             Connection conn = DBConnectionFactory.getInstance().getConnection();
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(sql);

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import model.Employee;
 import java.sql.SQLException;
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 /**
  *
@@ -20,5 +20,5 @@ public interface EmployeeDao {
     public void deleteEmployee(Employee employee) throws SQLException;
     public void updateEmployee(Employee employee) throws SQLException;
     public BigDecimal getAvarageSalary() throws SQLException;
-    public Map<String, Integer> getEmployeesWithMostCompletedTasksInPastMonth() throws SQLException;
+    public LinkedHashMap<String, Integer> getEmployeesWithMostCompletedTasksInPastMonth() throws SQLException;
 }

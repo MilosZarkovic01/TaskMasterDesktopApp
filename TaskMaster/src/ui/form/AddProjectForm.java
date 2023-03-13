@@ -374,6 +374,7 @@ public class AddProjectForm extends javax.swing.JFrame {
         Project project = getInputData();
         try {
             ProjectController.getInstance().saveProject(project);
+            clearForm();
             JOptionPane.showMessageDialog(this, "Project successfully saved!");
         } catch (SQLException ex) {
             Logger.getLogger(AddProjectForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -440,5 +441,21 @@ public class AddProjectForm extends javax.swing.JFrame {
         p.setBudget(BigDecimal.valueOf(Double.parseDouble(txtBudget.getText().trim())));
         p.setTasks(((TaskTableModel) tblTasks.getModel()).getTasks());
         return p;
+    }
+
+    private void clearForm() {
+        txtProjectName.setText("");
+        txtDescription.setText("");
+        txtBudget.setText("");
+        txtTitle.setText("");
+        txtDescription1.setText("");
+
+        jdcStartDate.setDate(null);
+        jdcEndDate.setDate(null);
+        jdcDueDate.setDate(null);
+        jcbEmployee.setSelectedIndex(-1);
+        
+        ((TaskTableModel)tblTasks.getModel()).setTasks(new ArrayList<>());
+        ((TaskTableModel)tblTasks.getModel()).update();
     }
 }

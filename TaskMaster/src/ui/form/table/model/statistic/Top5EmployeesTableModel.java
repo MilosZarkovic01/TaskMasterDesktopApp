@@ -4,7 +4,7 @@
  */
 package ui.form.table.model.statistic;
 
-import java.util.Map;
+import java.util.LinkedHashMap;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -13,10 +13,10 @@ import javax.swing.table.AbstractTableModel;
  */
 public class Top5EmployeesTableModel extends AbstractTableModel {
 
-    public Map<String, Integer> top5Employees;
+    public LinkedHashMap<String, Integer> top5Employees;
     private final String[] columnNames = {"Full name", "Number of tasks"};
 
-    public Top5EmployeesTableModel(Map<String, Integer> top5Employees) {
+    public Top5EmployeesTableModel(LinkedHashMap<String, Integer> top5Employees) {
         this.top5Employees = top5Employees;
     }
 
